@@ -5,15 +5,16 @@ interface ListProps{
     persons:Student[]
 }
 
-export default function Zadani() {
-    const[hodnota, setHodnota] = useState<string>("")
-    return(
-        <body>
-            <div>
-                <input type="text" className="border p-2" placeholder="Zadej jmeno: " value={hodnota} onChange={(e)=>setHodnota(e.target.value)} />
-                
-            </div>
-        </body>
-        
-    )
-}
+
+
+type Props = {
+    hodnota: string;
+    setHodnota: (val: string) => void;
+  };
+  
+  export default function Zadavani({ hodnota, setHodnota }: Props) {
+    return (
+      <input className="border p-2" value={hodnota} onChange={(e) => setHodnota(e.target.value)} />
+      
+    );
+  }
