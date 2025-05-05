@@ -19,6 +19,7 @@ export default function ProstudentyPage(){
     return(
         
         <div>
+            <Zadani hodnota={hodnota} setHodnota={setHodnota} />
             Jmeno: {hodnota}
             
             

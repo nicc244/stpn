@@ -10,8 +10,8 @@ export default function Zadani() {
     return(
         <body>
             <div>
-                <input type="text" className="border p-2" placeholder="Zadej jmeno: "value={hodnota} onChange={(e)=>setHodnota(e.target.value)} />
-                jmeno: {hodnota}
+                <input type="text" className="border p-2" placeholder="Zadej jmeno: " value={hodnota} onChange={(e)=>setHodnota(e.target.value)} />
+                
             </div>
         </body>
         
