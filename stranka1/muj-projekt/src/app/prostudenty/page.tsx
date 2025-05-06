@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Zadani from "./components/students";
+import Zadani from "./components/zadavani";
 
 
 
@@ -14,13 +14,28 @@ export interface Student{
 
 
 export default function ProstudentyPage(){
-    const[hodnota, setHodnota]=useState("")
+    const[seznam, setSeznam]=useState<Student[]>([]);
+
+    const novyStudent = (student: Student) =>
+    {
+        
+        setSeznam([...seznam, student])
+    };
+    
     
     return(
         
         <div>
-            <Zadani hodnota={hodnota} setHodnota={setHodnota} />
-            Jmeno: {hodnota}
+            <Zadani novyStudent={novyStudent} />
+            <ul className="mt-4" >
+                {seznam.map((s, index) => (
+                    <li key={s.id} className="border p-2">
+                        {s.name} {s.surname} (ID: {s.id})
+                    </li>
+                ))}
+
+                
+            </ul>
             
             
             
