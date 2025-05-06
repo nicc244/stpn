@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { Student } from "./page";
 import { maxHeaderSize } from "http";
+import error from "next/error";
 
 
 interface StudentListPageProps {
@@ -19,13 +20,24 @@ export default function StudentListPage(props: StudentListPageProps) {
         age: 0
     })
 
+    
 
-    const handleAddStudent = (student: Student) => {
-        const maxId = students.reduce((max, student)=> {
-            return student.id > max ? student.id : max;
-        },0)
 
-        const newStudent = {...student, id: maxId+1}
+    const handleAddStudent = async (student: Student) => {
+        const response = await fetch('http://localhost:3333/student', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(student),
+          });
+
+          if(!response.ok){
+              console.log('error')
+            }
+            
+        const newStudent = await response.json() as Student
+
         console.log(newStudent)
         setStudents([...students, newStudent])
     }
