@@ -184,11 +184,12 @@ export default function ProstudentyPage(){
                         </div>
 
                     </div>
+                    <div onClick={() => handleSubmit()} className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 w-48 text-center">Odeslat</div>
                 </div>
 
                 <div>
-                    <div onClick={() => handleSubmit()} className="border-2 m-4 ml-1 w-max p-4 hover:bg-gray-500 hover:text-white cursor-pointer">Odeslat</div>
-                    <div onClick={() => deleteAllStudents()} className="border-2 m-4 ml-1 w-max p-4 hover:bg-gray-500 hover:text-white cursor-pointer">SMAZAT STUDENTY</div>
+                    
+                    <div onClick={() => deleteAllStudents()} className="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 w-48 text-center">SMAZAT STUDENTY</div>
                 </div>
             </form>
             )}
