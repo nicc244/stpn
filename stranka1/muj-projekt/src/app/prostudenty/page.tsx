@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import Zadani from "./components/zadavani";
 import { Formik } from "formik";
 import * as Yup from 'yup';
+import { FormikHelpers } from 'formik';
+
 
 
 export interface Student{
@@ -18,11 +20,11 @@ export default function ProstudentyPage(){
     
     const validationSchema = Yup.object().shape({
         name: Yup.string()
-          .required('Meno je povinné')
-          .min(2, 'Meno musí mať aspoň 2 znaky'),
+          .required('Jméno je povinné')
+          .min(2, 'Jméno musí mít aspoň 2 znaky'),
         surname: Yup.string()
-          .required('Priezvisko je povinné')
-          .min(2, 'Priezvisko musí mať aspoň 2 znaky'),
+          .required('Příjmení je povinné')
+          .min(2, 'Příjmení musí mít aspoň 2 znaky'),
         email: Yup.string()
           .required('Email je povinný')
           .email('Neplatný formát emailu'),
@@ -67,6 +69,20 @@ export default function ProstudentyPage(){
         console.log('novyStudent')
         handleAddStudent(student)
     };
+
+    const deleteAllStudents = async () => {
+        const response = await fetch('http://localhost:3333/student', {
+            method: 'DELETE',
+        });
+    
+        if (!response.ok) {
+            console.error('Chyba při mazání studentů');
+        } else {
+            console.log('Všichni studenti smazáni');
+            setSeznam([]);
+        }
+    };
+    
     
     
     return(
@@ -76,14 +92,17 @@ export default function ProstudentyPage(){
         <div className="">
             <Formik 
                 initialValues={{
+                    id:1,
                     name: '',
                     surname: '',
                     email: '',
                 }}
                 validationSchema={validationSchema}
-                onSubmit={(values) => {
+                onSubmit={async (values, {resetForm}) => {
                     console.log('Odesilam formular')
                     console.log(values)
+                    await handleAddStudent(values);
+                    resetForm();
                 }}
             >
             {({
@@ -129,7 +148,7 @@ export default function ProstudentyPage(){
                             {errors.surname && touched.surname && errors.surname}
                         </div>
                     </div>
-
+                    
                     <div>
                         <div>
                             <input
@@ -150,6 +169,7 @@ export default function ProstudentyPage(){
 
                 <div>
                     <div onClick={() => handleSubmit()} className="border-2 m-4 ml-1 w-max p-4 hover:bg-gray-500 hover:text-white cursor-pointer">Odeslat</div>
+                    <div onClick={() => deleteAllStudents()} className="border-2 m-4 ml-1 w-max p-4 hover:bg-gray-500 hover:text-white cursor-pointer">SMAZAT STUDENTY</div>
                 </div>
             </form>
             )}
@@ -162,7 +182,7 @@ export default function ProstudentyPage(){
             <ul className="mt-4" >
                 {seznam.map((s, index) => (
                     <li key={s.id} className="border p-2">
-                        {s.name} {s.surname} 
+                        ( ID: {s.id} ) {s.name} {s.surname} 
                     </li>
                 ))}
 
