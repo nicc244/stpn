@@ -144,7 +144,7 @@ export default function ProstudentyPage(){
                                 value={values.surname}
                             />
                         </div>
-                        <div>
+                        <div className="text-red-500 font-bold text-wrap max-w-[180px] text-sm pt-2">
                             {errors.surname && touched.surname && errors.surname}
                         </div>
                     </div>
@@ -160,7 +160,7 @@ export default function ProstudentyPage(){
                                 value={values.email}
                             />
                         </div>
-                        <div>
+                        <div className="text-red-500 font-bold text-wrap max-w-[180px] text-sm pt-2">
                             {errors.email && touched.email && errors.email}
                         </div>
 
