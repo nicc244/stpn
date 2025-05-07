@@ -184,7 +184,7 @@ export default function ProstudentyPage(){
                         </div>
 
                     </div>
-                    <div onClick={() => handleSubmit()} className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 w-48 text-center">Odeslat</div>
+                    <div onClick={() => handleSubmit()} className="px-6 py-1.4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 w-48 h-7 text-center">Odeslat</div>
                 </div>
 
                 <div>
