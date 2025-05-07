@@ -82,6 +82,22 @@ export default function ProstudentyPage(){
             setSeznam([]);
         }
     };
+
+    const deleteStudent = async (id: number) => {
+        const response = await fetch(`http://localhost:3333/student/${id}`, {
+            method: 'DELETE',
+            
+        });
+    
+        if (!response.ok) {
+            console.error('Chyba při mazání studenta');
+            
+        } else {
+            console.log(`Student s ID ${id} smazán`);
+            setSeznam(seznam.filter(s => s.id !== id));
+        }
+    };
+    
     
     
     
@@ -126,6 +142,7 @@ export default function ProstudentyPage(){
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 value={values.name}
+                                placeholder="Jmeno"
                             />
                         </div>
                         <div className="text-red-500 font-bold text-wrap max-w-[180px] text-sm pt-2">
@@ -142,6 +159,7 @@ export default function ProstudentyPage(){
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 value={values.surname}
+                                placeholder="Příjmení"
                             />
                         </div>
                         <div className="text-red-500 font-bold text-wrap max-w-[180px] text-sm pt-2">
@@ -158,6 +176,7 @@ export default function ProstudentyPage(){
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 value={values.email}
+                                placeholder="email"
                             />
                         </div>
                         <div className="text-red-500 font-bold text-wrap max-w-[180px] text-sm pt-2">
@@ -182,7 +201,12 @@ export default function ProstudentyPage(){
             <ul className="mt-4" >
                 {seznam.map((s, index) => (
                     <li key={s.id} className="border p-2">
-                        ( ID: {s.id} ) {s.name} {s.surname} 
+                        <span>
+                            ( ID: {s.id} ) {s.name} {s.surname} 
+                        </span>
+                        <button onClick={() => deleteStudent(s.id)} className="ml-4 px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600">
+                            Smazat
+                        </button>
                     </li>
                 ))}
 
